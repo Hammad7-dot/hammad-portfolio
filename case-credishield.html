@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CrediShield — Hammad</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-left">
+    <div class="nav-badge"><span>H</span></div>
+    <span class="nav-name">Hammad</span>
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">Menu</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html" aria-current="page">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="wrap case-hero">
+  <p class="eyebrow">Case 01 · Real-world usefulness</p>
+  <h1>CrediShield — AI Co-Pilot for Bank Loan Underwriting</h1>
+  <div class="case-meta">
+    <span><strong>Stack:</strong> Multimodal ML pipeline, dashboard UI</span>
+    <span><strong>Role:</strong> Solo build</span>
+    <span><strong>Status:</strong> Local demo — not yet deployed</span>
+  </div>
+</header>
+
+<section class="wrap">
+
+  <div class="case-block">
+    <h2>The problem</h2>
+    <p>Bank loan managers were manually reviewing documents and calculating risk by hand for every application — slow, repetitive work that didn't need a human doing it line by line.</p>
+  </div>
+
+  <div class="case-block">
+    <h2>What I did</h2>
+    <p>Built CrediShield to take that off their plate — it analyzes the applicant's data across three modalities in one panel: tabular financial data (income, loan amount, term, credit history), unstructured text (the applicant's letter of intent), and image data (KYC/collateral documents). It generates risk charts and produces a PDF summary automatically.</p>
+    <p>I'd originally included an image upload/KYC verification section, but it wasn't working reliably, so I cut it rather than ship something broken, and refactored the rest into a clean multi-file architecture.</p>
+    <div class="case-media">
+      <img src="assets/img/credishield-demo.gif" alt="CrediShield underwriting panel screen recording showing all three modality inputs">
+      <p class="media-caption">Real screen recording — the underwriting panel: tabular financial data, applicant letter of intent, and KYC/collateral image upload.</p>
+    </div>
+  </div>
+
+  <div class="case-block">
+    <h2>How it's built, no mystery code</h2>
+    <p>The panel is a Streamlit frontend collecting three input types per applicant. Tabular fields (income, loan amount, term, credit history, education, self-employed status) feed a structured risk model. The free-text letter of intent is a separate modality passed through for qualitative context. The image upload path (KYC/collateral) is present in the UI but explicitly disabled — the demo copy says "please upload an image asset to fulfill the multimodal pipeline validation" rather than pretending it's a production identity-verification pipeline, because it isn't one yet.</p>
+  </div>
+
+  <div class="case-block">
+    <h2>The honest gap</h2>
+    <div class="gap-note">This is a local demo, not a deployed app. There's no live link yet — I chose to be upfront about that rather than imply otherwise. It's still on the list to actually deploy.</div>
+  </div>
+
+  <div class="case-block">
+    <h2>What came of it</h2>
+    <p>A loan manager can now run an application through the app and get a risk score, charts, and a summary PDF back — automatically, instead of doing it by hand.</p>
+  </div>
+
+</section>
+
+<nav class="wrap case-nav">
+  <a href="case-task-api.html">← Task API</a>
+  <a href="case-healthcare-copilot.html">Next: Healthcare AI Co-Pilot →</a>
+</nav>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Hammad. Built by hand, HTML/CSS, no framework.</p>
+    <a href="contact.html">Get in touch →</a>
+  </div>
+</footer>
+
+</body>
+</html>

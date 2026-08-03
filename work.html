@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Hammad</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-left">
+    <div class="nav-badge"><span>H</span></div>
+    <span class="nav-name">Hammad</span>
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">Menu</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html" aria-current="page">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<header style="padding: 3.5rem 0 1rem;">
+  <div class="wrap">
+    <p class="eyebrow">Work</p>
+    <h1 style="font-size: clamp(1.8rem, 4vw, 2.4rem); max-width: 26ch;">Four builds, in the order I'd walk you through them.</h1>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="grid">
+
+      <a class="card" href="case-credishield.html" id="credishield">
+        <div class="card-media"><img src="assets/img/credishield-demo.gif" alt="CrediShield underwriting panel"></div>
+        <div class="card-body">
+          <p class="card-tag">Case 01 · Real-world usefulness</p>
+          <h3>CrediShield</h3>
+          <p>AI co-pilot for bank loan underwriting. Replaces manual document review and risk calculation with automated scoring, charts, and a PDF summary.</p>
+        </div>
+      </a>
+
+      <a class="card" href="case-healthcare-copilot.html" id="healthcare-copilot">
+        <div class="card-media"><img src="assets/img/healthcare-copilot-demo.gif" alt="Healthcare AI Co-Pilot imaging workflow"></div>
+        <div class="card-body">
+          <p class="card-tag">Case 02 · Technical depth</p>
+          <h3>Healthcare AI Co-Pilot</h3>
+          <p>Multimodal decision support across chest X-ray imaging, tabular cardiac risk, and clinical notes — one review flow, three data types.</p>
+        </div>
+      </a>
+
+      <a class="card" href="case-task-api.html" id="task-api">
+        <div class="card-media"><img src="assets/img/taskapi-auth-verified.png" alt="Task API auth flow verified in Swagger"></div>
+        <div class="card-body">
+          <p class="card-tag">Case 03 · Foundational proof</p>
+          <h3>Task Management API</h3>
+          <p>FastAPI CRUD, then Supabase Auth added on top — signup, login, JWT-protected routes. Smallest case, cleanest proof of the actual stack.</p>
+        </div>
+      </a>
+
+      <a class="card" href="case-mcp-agents.html" id="mcp-agents">
+        <div class="card-media"><img src="assets/img/mcp-events.png" alt="Live MCP Google Calendar tool call output"></div>
+        <div class="card-body">
+          <p class="card-tag">Case 04 · Workflow vs. agent, MCP</p>
+          <h3>Weekly Brief Workflow + MCP</h3>
+          <p>An n8n pipeline with 5 logged real runs, correctly classified as a workflow — plus a live MCP connector pulling my real Google Calendar data.</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Hammad. Built by hand, HTML/CSS, no framework.</p>
+    <a href="contact.html">Get in touch →</a>
+  </div>
+</footer>
+
+</body>
+</html>

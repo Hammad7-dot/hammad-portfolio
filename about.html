@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Hammad</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-left">
+    <div class="nav-badge"><span>H</span></div>
+    <span class="nav-name">Hammad</span>
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">Menu</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="about.html" aria-current="page">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<header style="padding: 4rem 0 1rem;">
+  <div class="wrap">
+    <p class="eyebrow">About</p>
+    <h1 style="font-size: clamp(1.8rem, 4vw, 2.4rem); max-width: 26ch;">Hammad</h1>
+  </div>
+</header>
+
+<section>
+  <div class="wrap" style="max-width: 640px;">
+    <p style="font-size: 17px;">I build full-stack AI tools fast — from idea to a working, deployed app. FastAPI backend, a real model doing real work in between, a deployed app at the end. I test as I go, cut what doesn't work instead of shipping it broken, and I can tell you exactly why I made each decision.</p>
+    <p style="font-size: 17px;">That's the pattern across the work on this site: CrediShield's image-verification step got cut when it wasn't working reliably, rather than shipped broken. AI Road Guard got swapped out of the case list for Healthcare AI Co-Pilot when I didn't have a usable live capture ready, rather than faked in with a stand-in image. The n8n workflow is labeled a workflow, not an agent, because that's what it technically is — even though "agent" is the more impressive-sounding word.</p>
+    <p style="font-size: 17px;">If you're a founder at an early-stage startup who needs someone who can ship an AI product, not just prototype one — that's the gap I'm trying to close.</p>
+    <hr class="divider">
+    <p style="font-size: 14px; color: var(--muted);">No photo here yet — this page is text-only for now. It's on the "still ugly" list.</p>
+    <a class="btn btn-ghost" href="contact.html">Email me →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Hammad. Built by hand, HTML/CSS, no framework.</p>
+    <a href="contact.html">Get in touch →</a>
+  </div>
+</footer>
+
+</body>
+</html>

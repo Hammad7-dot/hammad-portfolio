@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare AI Co-Pilot — Hammad</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-left">
+    <div class="nav-badge"><span>H</span></div>
+    <span class="nav-name">Hammad</span>
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">Menu</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html" aria-current="page">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="wrap case-hero">
+  <p class="eyebrow">Case 02 · Technical depth</p>
+  <h1>Healthcare AI Co-Pilot</h1>
+  <div class="case-meta">
+    <span><strong>Stack:</strong> Multimodal ML — imaging, tabular, NLP</span>
+    <span><strong>Role:</strong> Solo build</span>
+    <span><strong>Status:</strong> Local demo — synthetic data</span>
+  </div>
+</header>
+
+<section class="wrap">
+
+  <div class="case-block">
+    <h2>The problem</h2>
+    <p>Clinical review often means pulling together three separate kinds of evidence by hand — imaging, structured risk factors, and written notes — before a decision gets made. I wanted to see if one panel could bring all three into a single review flow.</p>
+  </div>
+
+  <div class="case-block">
+    <h2>What I did</h2>
+    <p>Built a multimodal decision-support panel across three tabs: <strong>Imaging (CXR)</strong> — chest X-ray pneumonia screening, either upload a real grayscale X-ray or generate a synthetic demo sample; <strong>Cardiac Risk (Tabular/ANN)</strong> — structured patient risk factors through a trained network; and <strong>Patient Notes (Text)</strong> — clinical notes as the third modality. The interface is explicit that demo runs are on synthetic data, and that a real vision or OCR API is needed before any production use — I didn't want the UI implying clinical validity it doesn't have.</p>
+    <div class="case-media" style="max-width:640px;">
+      <img src="assets/img/healthcare-copilot-demo.gif" alt="Healthcare AI Co-Pilot imaging and triage workflow, screen recording">
+      <p class="media-caption">Real screen recording — imaging tab, X-ray upload/synthetic-generation flow.</p>
+    </div>
+  </div>
+
+  <div class="case-block">
+    <h2>Why this case, not AI Road Guard</h2>
+    <p>I originally planned to feature AI Road Guard (live road-crack detection on YOLOv8n) here, but I didn't have a usable live capture ready when it came time to gather proof images. Rather than fake a screenshot or ship a placeholder, I swapped it for this case — Co-Pilot's three-modality depth proves the same "real, technically deep" claim at least as well, and I had an actual recording of it working.</p>
+  </div>
+
+  <div class="case-block">
+    <h2>How it's built, no mystery code</h2>
+    <p>Each tab is an independent input path feeding its own model type: the imaging tab expects a grayscale image (PNG/JPG) and runs it through a screening model or generates a synthetic demo sample if none is uploaded; the tabular tab runs structured fields through a small trained network (ANN) for cardiac risk; the notes tab takes free text for qualitative review. The three don't currently fuse into one combined score — they sit side by side in one review interface, which is an honest description of what the demo does today, not a claim of a unified multimodal model.</p>
+  </div>
+
+  <div class="case-block">
+    <h2>The honest gap</h2>
+    <div class="gap-note">Demo runs on synthetic data, and the disclaimer in the UI is real: "demo runs on synthetic data — plug in a real vision or OCR API before production." Not deployed publicly.</div>
+  </div>
+
+</section>
+
+<nav class="wrap case-nav">
+  <a href="case-credishield.html">← CrediShield</a>
+  <a href="case-mcp-agents.html">Next: Weekly Brief + MCP →</a>
+</nav>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Hammad. Built by hand, HTML/CSS, no framework.</p>
+    <a href="contact.html">Get in touch →</a>
+  </div>
+</footer>
+
+</body>
+</html>
