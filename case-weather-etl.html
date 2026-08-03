@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic ETL Weather Dashboard — Hammad</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-left">
+    <div class="nav-badge"><span>H</span></div>
+    <span class="nav-name">Hammad</span>
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">Menu</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html" aria-current="page">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="wrap case-hero">
+  <p class="eyebrow">Case 05 · Data engineering</p>
+  <h1>Dynamic ETL Weather Dashboard 2.0</h1>
+  <div class="case-meta">
+    <span><strong>Stack:</strong> Python, Streamlit, SQLAlchemy, OpenWeather API, APScheduler</span>
+    <span><strong>Role:</strong> Solo build</span>
+    <span><a href="https://dynamic-etl-weather-dashboard-20-fpcmp6knkmctyrxdgzkotr.streamlit.app/" target="_blank" rel="noopener">See it live →</a></span>
+    <span><a href="https://github.com/Hammad7-dot/Dynamic-ETL-Weather-Dashboard-2.0" target="_blank" rel="noopener">View repo →</a></span>
+  </div>
+</header>
+
+<section class="wrap">
+
+  <div class="case-block">
+    <h2>The problem</h2>
+    <p>My other cases each call a model once and show the result. I wanted a project that proved a different skill: a real ETL pipeline that runs unattended, on a schedule, against a live external API — extract, transform, load, and keep doing it every hour without anyone watching it.</p>
+  </div>
+
+  <div class="case-block">
+    <h2>What I did</h2>
+    <p>Built a 3-stage ETL pipeline (<code>extract.py</code> → <code>transform.py</code> → <code>load.py</code>, orchestrated by <code>pipeline.py</code>) that pulls live weather for tracked cities from the OpenWeather API, cleans and enriches it, and writes it to a SQLite database via SQLAlchemy. A background scheduler (APScheduler) reruns the pipeline hourly on its own, and the Streamlit dashboard reads whatever's currently in the database — five tabs: live metrics, city comparison, 5-day forecast, trend analytics, and a geospatial map.</p>
+    <div class="case-media">
+      <img src="assets/img/weather-dashboard-demo.gif" alt="Dynamic ETL Weather Dashboard screen recording showing multi-city dashboard with humidity trend charts">
+      <p class="media-caption">Real screen recording — multi-city dashboard, temperature/humidity trend charts across London, Karachi, New York, Dubai, Lahore, and Tokyo.</p>
+    </div>
+    <div class="case-media">
+      <img src="assets/img/weather-dashboard-live.png" alt="Live deployed dashboard showing New York current weather metrics">
+      <p class="media-caption">Live on Streamlit Community Cloud — a manual refresh pulling current conditions for London, Karachi, and New York.</p>
+    </div>
+  </div>
+
+  <div class="case-block">
+    <h2>Three real bugs I had to actually understand, not just fix</h2>
+    <p><strong>Validation order bug:</strong> the transform step originally ran validation before feature engineering. Validation backfills missing values with the string <code>"Unknown"</code> — but <code>pd.cut()</code> (used to bucket temperature into Cold/Warm/Hot) crashes on a column of strings. If OpenWeather ever returned a response missing temperature or humidity, the whole pipeline would crash instead of degrading gracefully. Fix: feature engineering now always runs before validation, with a code comment explaining exactly why the order matters so I don't reverse it by accident later.</p>
+    <p><strong>Timestamp crash on missing sunrise/sunset:</strong> OpenWeather doesn't always include <code>sys.sunrise</code>/<code>sys.sunset</code> depending on the station. <code>datetime.fromtimestamp(None)</code> raises a <code>TypeError</code>, which used to take down the whole ETL run for that city. Fix: a small <code>_safe_timestamp()</code> helper that returns <code>None</code> instead of crashing on missing or invalid epoch values.</p>
+    <p><strong>Duplicate scheduler instances:</strong> Streamlit reruns the entire script on every user interaction, and <code>session_state</code> is per browser tab — so an early version that guarded the scheduler with <code>if "scheduler_started" not in st.session_state</code> let every new tab spin up its own separate <code>BackgroundScheduler</code> in the same process, each one independently hitting the weather API on its own hourly timer. Fix: a module-level flag shared by the whole process instead of a per-session one, so the job registers exactly once no matter how many tabs are open.</p>
+  </div>
+
+  <div class="case-block">
+    <h2>How it's built, no mystery code</h2>
+    <p><code>etl/extract.py</code> wraps the OpenWeather request in a <code>requests.Session</code> with automatic retries on 429/500/502/503/504 — so a transient API hiccup doesn't fail the whole city. <code>etl/transform.py</code> turns the raw JSON into a flat row (temperature, humidity, wind, clouds, coordinates), adds derived columns (temperature/humidity level buckets, day of week, hour), then validates. <code>etl/load.py</code> and <code>database/repository.py</code> handle writing to and reading from SQLite through SQLAlchemy models. <code>scheduler/scheduler.py</code> reruns the multi-city pipeline every hour in the background and, after each run, checks configurable thresholds (extreme heat, freezing, strong wind, high humidity) and can fire a webhook alert — but only the first time a threshold is crossed, not on every subsequent hourly check, so a multi-hour heatwave sends one notification instead of one every hour.</p>
+  </div>
+
+  <div class="case-block">
+    <h2>What came of it</h2>
+    <p>A dashboard that keeps itself current without me touching it — refresh once, and the scheduler keeps pulling fresh data hourly from then on. It's also the first case on this site that isn't "call a model once," which was the actual point: proving I can build the unglamorous, always-running data plumbing underneath an AI product, not just the model-facing part.</p>
+  </div>
+
+</section>
+
+<nav class="wrap case-nav">
+  <a href="case-mcp-agents.html">← Weekly Brief + MCP</a>
+  <a href="work.html">Back to all work →</a>
+</nav>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Hammad. Built by hand, HTML/CSS, no framework.</p>
+    <a href="contact.html">Get in touch →</a>
+  </div>
+</footer>
+
+</body>
+</html>
