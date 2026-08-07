@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real-Time Crypto Analytics Platform — Hammad</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-left">
+    <div class="nav-badge"><span>H</span></div>
+    <span class="nav-name">Hammad</span>
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">Menu</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html" aria-current="page">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="wrap case-hero">
+  <p class="eyebrow">Case 04 · Data engineering</p>
+  <h1>Real-Time Crypto Analytics Platform</h1>
+  <div class="case-meta">
+    <span><strong>Stack:</strong> Python, PostgreSQL, Redis, FastAPI, Streamlit, Docker</span>
+    <span><strong>Role:</strong> Solo build</span>
+    <span><strong>Status:</strong> Local demo — not deployed</span>
+    <span><a href="https://github.com/Hammad7-dot/Real-Time-Crypto-Analytics-Platform" target="_blank" rel="noopener">View repo →</a></span>
+  </div>
+</header>
+
+<section class="wrap">
+
+  <div class="case-block">
+    <h2>The problem</h2>
+    <p>I wanted a project built the way a real team would run it — a written spec, a decision log, a blockers log — not just code that happens to work. Crypto prices move fast enough that "live dashboard" is a meaningful, checkable claim: either the numbers on screen are from the last few minutes or they aren't.</p>
+  </div>
+
+  <div class="case-block">
+    <h2>What I did</h2>
+    <p>Built a 7-stage pipeline against a written spec: a connection-pooled Postgres layer (<code>database.py</code>), a CoinGecko extractor with retry/backoff (<code>extract.py</code>), a transform stage that cleans data and computes a <code>volatility_score</code> (<code>transform.py</code>), a batched upsert loader (<code>load.py</code>), an APScheduler orchestrator running every 5 minutes (<code>etl_pipeline.py</code>), SQL aggregation queries using window functions for ranking (<code>analysis.py</code>), and a Streamlit dashboard that auto-refreshes every 60 seconds and only ever reads from the database — never calls the API directly (<code>dashboard.py</code>).</p>
+    <div class="case-media">
+      <img src="assets/img/crypto-dashboard-demo.gif" alt="Real-Time Crypto Analytics Platform dashboard screen recording showing KPIs and charts">
+      <p class="media-caption">Real screen recording — local run. Market cap, 24h price change, volume comparison, and volatility ranking, reading live from Postgres.</p>
+    </div>
+    <p>After the core 7 tasks, I added bonus extensions on top without touching their contracts: Redis caching for read queries (fails open if Redis is down), a FastAPI REST API over the same data, historical trend queries, Z-score anomaly detection, and Docker Compose to run the whole stack (Postgres, Redis, ETL, API, dashboard) with one command.</p>
+  </div>
+
+  <div class="case-block">
+    <h2>A real bug: the KPI that was silently wrong</h2>
+    <p>The "Average Price" KPI card was actually computing <code>.count()</code> on the market_cap column — not <code>AVG(current_price)</code> — and the card was mislabeled "Average Market Cap" in the UI on top of that. It ran without erroring, which is exactly what makes this kind of bug dangerous: a wrong number that looks confident. Fixed by adding a proper <code>analysis.average_price()</code> query matching the pattern of the other analysis functions, relabeling the card correctly, and removing the leftover unused call — logged as DEC-006 in the decision log rather than just quietly patched.</p>
+  </div>
+
+  <div class="case-block">
+    <h2>How it's built, no mystery code</h2>
+    <p><code>extract.py</code> pulls the top 20 coins from CoinGecko with exponential backoff (2s/4s/8s) on 429s and 5xx errors. <code>transform.py</code> validates each record — missing required fields and out-of-range values (negative price/market cap/volume) are rejected as two distinct reasons, and every dropped record gets written to a dead-letter JSONL file with the full raw payload, not just summarized in a log line, so bad upstream data is actually inspectable later. <code>load.py</code> batches valid records into Postgres via <code>ON CONFLICT</code> upserts. A <code>pipeline_runs</code> table records every ETL cycle's stage reached, row count, duration, and error, so <code>/health/etl</code> and the dashboard's status banner reflect real pipeline health, not just "the dashboard loaded fine." <code>cache.py</code> wraps the analysis reads in Redis with a 55-second TTL — just under the 60-second dashboard refresh — but the real staleness guard is that the cache is explicitly invalidated after every ETL load, not the TTL itself.</p>
+  </div>
+
+  <div class="case-block">
+    <h2>The honest gap</h2>
+    <div class="gap-note">Local-only — needs a running Postgres instance and, for the full stack, Redis. Not deployed anywhere public yet; the GIF above is a real local run, not a hosted demo. Anomaly detection needs at least 5 stored snapshots per coin (~25 minutes at the 5-minute polling cadence) before it flags anything, so it's not useful on a freshly started pipeline.</div>
+  </div>
+
+  <div class="case-block">
+    <h2>What came of it</h2>
+    <p>The clearest proof yet that I can work from a written spec instead of just building whatever seems reasonable in the moment — and that I'll log a decision and fix a wrong number quietly sitting in a KPI card instead of leaving it, once I notice it's wrong.</p>
+  </div>
+
+</section>
+
+<nav class="wrap case-nav">
+  <a href="case-weather-etl.html">← Weather ETL Dashboard</a>
+  <a href="work.html">Back to all work →</a>
+</nav>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Hammad. Built by hand, HTML/CSS, no framework.</p>
+    <a href="contact.html">Get in touch →</a>
+  </div>
+</footer>
+
+</body>
+</html>
