@@ -193,6 +193,46 @@ section { padding: 4rem 0; }
 .btn-ghost { background: transparent; color: var(--main); border-color: var(--border); }
 .btn-ghost:hover { border-color: var(--main); }
 
+.btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* ---------- Contact form ---------- */
+.contact-form { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1rem; }
+
+.contact-form label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--main);
+  background: var(--bg);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--main);
+}
+
+.form-status {
+  font-size: 14px;
+  min-height: 1.2em;
+}
+
+.form-status.ok { color: #1a7d3a; }
+.form-status.err { color: #b3261e; }
+
 /* ---------- Cards / grid ---------- */
 .grid {
   display: grid;

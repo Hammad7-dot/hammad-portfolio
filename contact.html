@@ -27,10 +27,65 @@
   <div class="wrap" style="max-width: 560px; text-align: left;">
     <p class="eyebrow">Contact</p>
     <h1 style="font-size: clamp(1.8rem, 4vw, 2.4rem); max-width: 20ch; margin-bottom: 1.25rem;">Building an AI product and need it shipped, not just prototyped?</h1>
-    <p style="font-size: 17px; color: var(--muted); margin-bottom: 2rem;">Email me and tell me what you're building and where you're stuck — I'll reply within a day.</p>
-    <a class="btn btn-primary" href="mailto:mhammadfazil14@gmail.com">mhammadfazil14@gmail.com →</a>
+    <p style="font-size: 17px; color: var(--muted); margin-bottom: 2rem;">Send me a message below and it'll land straight in my inbox — I'll reply within a day. Or email me directly at <a href="mailto:mhammadfazil14@gmail.com">mhammadfazil14@gmail.com</a>.</p>
+
+    <form id="contact-form" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="d42eb3db-25eb-41d4-acb2-ae5abf9d0679">
+      <input type="hidden" name="subject" value="New message from hammad-portfolio contact form">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+      <label for="cf-name">Name
+        <input id="cf-name" type="text" name="name" required>
+      </label>
+
+      <label for="cf-email">Email
+        <input id="cf-email" type="email" name="email" required>
+      </label>
+
+      <label for="cf-message">Message
+        <textarea id="cf-message" name="message" rows="5" required></textarea>
+      </label>
+
+      <button type="submit" class="btn btn-primary" id="cf-submit">Send message →</button>
+      <p class="form-status" id="cf-status" role="status"></p>
+    </form>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('cf-status');
+  const submitBtn = document.getElementById('cf-submit');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    status.className = 'form-status';
+    status.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        status.className = 'form-status ok';
+        status.textContent = "Sent — thanks, I'll reply within a day.";
+        form.reset();
+      } else {
+        throw new Error(data.message || 'Something went wrong');
+      }
+    } catch (err) {
+      status.className = 'form-status err';
+      status.textContent = "Couldn't send that — email me directly at mhammadfazil14@gmail.com instead.";
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
 
 <section class="section-border-top">
   <div class="wrap" style="max-width: 560px; text-align: left;">
