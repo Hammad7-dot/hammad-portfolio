@@ -45,7 +45,7 @@
     <h2>What I did</h2>
     <p>Built a 7-stage pipeline against a written spec: a connection-pooled Postgres layer (<code>database.py</code>), a CoinGecko extractor with retry/backoff (<code>extract.py</code>), a transform stage that cleans data and computes a <code>volatility_score</code> (<code>transform.py</code>), a batched upsert loader (<code>load.py</code>), an APScheduler orchestrator running every 5 minutes (<code>etl_pipeline.py</code>), SQL aggregation queries using window functions for ranking (<code>analysis.py</code>), and a Streamlit dashboard that auto-refreshes every 60 seconds and only ever reads from the database — never calls the API directly (<code>dashboard.py</code>).</p>
     <div class="case-media">
-      <img src="assets/img/crypto-dashboard-demo.gif" alt="Real-Time Crypto Analytics Platform dashboard screen recording showing KPIs and charts">
+      <video src="assets/img/crypto-dashboard-demo.mp4" poster="assets/img/crypto-dashboard-demo-poster.jpg" autoplay loop muted playsinline aria-label="Real-Time Crypto Analytics Platform dashboard screen recording showing KPIs and charts"></video>
       <p class="media-caption">Real screen recording — local run. Market cap, 24h price change, volume comparison, and volatility ranking, reading live from Postgres.</p>
     </div>
     <p>After the core 7 tasks, I added bonus extensions on top without touching their contracts: Redis caching for read queries (fails open if Redis is down), a FastAPI REST API over the same data, historical trend queries, Z-score anomaly detection, and Docker Compose to run the whole stack (Postgres, Redis, ETL, API, dashboard) with one command.</p>

@@ -1,0 +1,71 @@
+- generic [active] [ref=f7e1]:
+  - navigation [ref=f7e2]:
+    - link "H Hammad" [ref=f7e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=f7e4]: H
+      - generic [ref=f7e6]: Hammad
+    - list [ref=f7e7]:
+      - listitem [ref=f7e8]:
+        - link "Home" [ref=f7e9] [cursor=pointer]:
+          - /url: index.html
+      - listitem [ref=f7e10]:
+        - link "Work" [ref=f7e11] [cursor=pointer]:
+          - /url: work.html
+      - listitem [ref=f7e12]:
+        - link "About" [ref=f7e13] [cursor=pointer]:
+          - /url: about.html
+      - listitem [ref=f7e14]:
+        - link "Contact" [ref=f7e15] [cursor=pointer]:
+          - /url: contact.html
+  - banner [ref=f7e16]:
+    - generic [ref=f7e17]:
+      - paragraph [ref=f7e18]: Backend AI engineering
+      - heading "Backend to model to deployed — I ship the whole thing." [level=1] [ref=f7e19]
+      - paragraph [ref=f7e20]: FastAPI backend, a real model doing real work in between, a deployed app at the end. I test as I go, cut what doesn't work instead of shipping it broken, and I can tell you exactly why I made each decision.
+      - link "See my work →" [ref=f7e21] [cursor=pointer]:
+        - /url: work.html
+  - generic [ref=f7e23]:
+    - paragraph [ref=f7e24]: Proof point
+    - heading "CrediShield — a loan manager runs an application through the app and gets a risk score, charts, and a summary PDF back automatically." [level=2] [ref=f7e25]
+    - generic [ref=f7e26]:
+      - img "CrediShield multimodal underwriting panel, screen recording" [ref=f7e27]
+      - paragraph [ref=f7e28]: Real screen recording — CrediShield's underwriting panel, tabular + text + image modality inputs.
+  - generic [ref=f7e30]:
+    - paragraph [ref=f7e31]: What's here
+    - generic [ref=f7e32]:
+      - link [ref=f7e33] [cursor=pointer]:
+        - /url: work.html#credishield
+        - generic [ref=f7e34]:
+          - paragraph [ref=f7e35]: Case 01
+          - heading "CrediShield" [level=3] [ref=f7e36]
+          - paragraph [ref=f7e37]: AI co-pilot for bank loan underwriting — risk scoring, charts, PDF summary.
+      - link [ref=f7e38] [cursor=pointer]:
+        - /url: work.html#healthcare-copilot
+        - generic [ref=f7e39]:
+          - paragraph [ref=f7e40]: Case 02
+          - heading "Healthcare AI Co-Pilot" [level=3] [ref=f7e41]
+          - paragraph [ref=f7e42]: Multimodal decision support — imaging, tabular risk, and clinical notes in one review flow.
+      - link [ref=f7e43] [cursor=pointer]:
+        - /url: work.html#weather-etl
+        - generic [ref=f7e44]:
+          - paragraph [ref=f7e45]: Case 03
+          - heading "Weather ETL Dashboard" [level=3] [ref=f7e46]
+          - paragraph [ref=f7e47]: Scheduled ETL pipeline pulling live weather hourly — real bugs, real fixes, unattended.
+      - link [ref=f7e48] [cursor=pointer]:
+        - /url: work.html#crypto-analytics
+        - generic [ref=f7e49]:
+          - paragraph [ref=f7e50]: Case 04
+          - heading "Crypto Analytics Platform" [level=3] [ref=f7e51]
+          - paragraph [ref=f7e52]: Spec-driven ETL + Postgres + Redis + FastAPI, with a real logged KPI bug fix.
+  - contentinfo [ref=f7e53]:
+    - generic [ref=f7e54]:
+      - paragraph [ref=f7e55]: © 2026 Hammad. Built by hand, HTML/CSS, no framework.
+      - generic [ref=f7e56]:
+        - link "LinkedIn" [ref=f7e57] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/muhammad-hammad-khan-036618394/
+        - link "GitHub" [ref=f7e58] [cursor=pointer]:
+          - /url: https://github.com/Hammad7-dot
+        - link "Resume (PDF)" [ref=f7e59] [cursor=pointer]:
+          - /url: assets/Hammad_Resume.pdf
+      - link "Get in touch →" [ref=f7e60] [cursor=pointer]:
+        - /url: contact.html

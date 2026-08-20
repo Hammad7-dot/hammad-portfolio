@@ -45,7 +45,7 @@
     <h2>What I did</h2>
     <p>Built a 3-stage ETL pipeline (<code>extract.py</code> → <code>transform.py</code> → <code>load.py</code>, orchestrated by <code>pipeline.py</code>) that pulls live weather for tracked cities from the OpenWeather API, cleans and enriches it, and writes it to a SQLite database via SQLAlchemy. A background scheduler (APScheduler) reruns the pipeline hourly on its own, and the Streamlit dashboard reads whatever's currently in the database — five tabs: live metrics, city comparison, 5-day forecast, trend analytics, and a geospatial map.</p>
     <div class="case-media">
-      <img src="assets/img/weather-dashboard-demo.gif" alt="Dynamic ETL Weather Dashboard screen recording showing multi-city dashboard with humidity trend charts">
+      <video src="assets/img/weather-dashboard-demo.mp4" poster="assets/img/weather-dashboard-demo-poster.jpg" autoplay loop muted playsinline aria-label="Dynamic ETL Weather Dashboard screen recording showing multi-city dashboard with humidity trend charts"></video>
       <p class="media-caption">Real screen recording — multi-city dashboard, live on Streamlit Community Cloud, temperature/humidity trend charts across London, Karachi, New York, Dubai, Lahore, and Tokyo.</p>
     </div>
   </div>
